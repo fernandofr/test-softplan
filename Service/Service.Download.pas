@@ -6,7 +6,7 @@ uses
   System.Classes,
   System.Generics.Collections,
   System.SysUtils,
-  Service.Interfaces,
+  Service.Consts,
   IdHTTP,
   IdComponent,
   IdAuthentication,

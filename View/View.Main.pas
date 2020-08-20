@@ -67,7 +67,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Service.Interfaces;
+  Service.Consts;
 
 procedure TViewMain.sbLocalDonwloadInvokeSearch(Sender: TObject);
 resourcestring
