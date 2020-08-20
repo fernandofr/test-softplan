@@ -2,7 +2,9 @@ program DownloadManager;
 
 uses
   Vcl.Forms,
-  View.Main in 'View\View.Main.pas' {ViewMain};
+  View.Main in 'View\View.Main.pas' {ViewMain},
+  Service.Download in 'Service\Service.Download.pas',
+  Service.Interfaces in 'Service\Service.Interfaces.pas';
 
 {$R *.res}
 

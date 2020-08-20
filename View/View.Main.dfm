@@ -1,8 +1,8 @@
 object ViewMain: TViewMain
   Left = 0
   Top = 0
-  ClientHeight = 465
-  ClientWidth = 779
+  ClientHeight = 275
+  ClientWidth = 771
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = 7829367
@@ -11,24 +11,23 @@ object ViewMain: TViewMain
   Font.Style = []
   OldCreateOrder = False
   Position = poDesktopCenter
+  OnClose = FormClose
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 17
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 779
-    Height = 465
+    Width = 771
+    Height = 275
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitLeft = 312
-    ExplicitTop = 320
-    ExplicitWidth = 185
-    ExplicitHeight = 41
+    ExplicitHeight = 457
     object pnlTitulo: TPanel
       Left = 0
       Top = 0
-      Width = 779
+      Width = 771
       Height = 73
       Align = alTop
       BevelOuter = bvNone
@@ -95,9 +94,9 @@ object ViewMain: TViewMain
     object pnInformacoes: TPanel
       Left = 0
       Top = 73
-      Width = 779
-      Height = 186
-      Align = alTop
+      Width = 771
+      Height = 202
+      Align = alClient
       BevelOuter = bvNone
       Color = clWhite
       Padding.Left = 20
@@ -106,6 +105,8 @@ object ViewMain: TViewMain
       Padding.Bottom = 10
       ParentBackground = False
       TabOrder = 1
+      ExplicitTop = 79
+      ExplicitHeight = 196
       object Label3: TLabel
         AlignWithMargins = True
         Left = 10
@@ -155,6 +156,9 @@ object ViewMain: TViewMain
         Font.Style = []
         ParentFont = False
         TabOrder = 0
+        Text = 
+          'https://github.com/infinitered/reactotron/releases/download/v3.0' +
+          '.0-beta.9/Reactotron-Setup-3.0.0-beta.9.exe'
       end
       object sbLocalDonwload: TSearchBox
         Left = 10
@@ -168,11 +172,32 @@ object ViewMain: TViewMain
         Font.Style = []
         ParentFont = False
         TabOrder = 1
+        Text = 'C:\Users\Delphi\Desktop\temp'
+        OnInvokeSearch = sbLocalDonwloadInvokeSearch
       end
-      object pnAdd: TPanel
-        Left = 10
+      object pnCancelDonwload: TPanel
+        Left = 511
         Top = 115
-        Width = 751
+        Width = 250
+        Height = 41
+        BevelOuter = bvNone
+        Caption = 'CANCELAR DOWNLOAD'
+        Color = 4678655
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        ParentBackground = False
+        ParentFont = False
+        TabOrder = 2
+        Visible = False
+        OnClick = pnCancelDonwloadClick
+      end
+      object pnStartDonwload: TPanel
+        Left = 511
+        Top = 115
+        Width = 250
         Height = 41
         BevelOuter = bvNone
         Caption = 'INICIAR DOWNLOAD'
@@ -184,28 +209,60 @@ object ViewMain: TViewMain
         Font.Style = [fsBold]
         ParentBackground = False
         ParentFont = False
-        TabOrder = 2
-      end
-      object ProgressBar1: TProgressBar
-        Left = 10
-        Top = 161
-        Width = 751
-        Height = 17
         TabOrder = 3
+        OnClick = pnStartDonwloadClick
       end
-    end
-    object DBGrid1: TDBGrid
-      Left = 0
-      Top = 259
-      Width = 779
-      Height = 206
-      Align = alClient
-      TabOrder = 2
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = 7829367
-      TitleFont.Height = -13
-      TitleFont.Name = 'Segoe UI'
-      TitleFont.Style = []
+      object pnShowProgressDownload: TPanel
+        Left = 255
+        Top = 115
+        Width = 250
+        Height = 41
+        BevelOuter = bvNone
+        Caption = 'EXIBIR MENSAGEM'
+        Color = 11829830
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        ParentBackground = False
+        ParentFont = False
+        TabOrder = 4
+        Visible = False
+        OnClick = pnShowProgressDownloadClick
+      end
+      object pnGgDownload: TPanel
+        Left = 20
+        Top = 170
+        Width = 731
+        Height = 22
+        Align = alBottom
+        BevelOuter = bvNone
+        TabOrder = 5
+        Visible = False
+        ExplicitLeft = 10
+        ExplicitTop = 164
+        ExplicitWidth = 741
+        object ggDownload: TGauge
+          Left = -20
+          Top = 1
+          Width = 751
+          Height = 17
+          BackColor = 14474460
+          BorderStyle = bsNone
+          Color = clWhite
+          ForeColor = 3329330
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -13
+          Font.Name = 'Segoe UI'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+          Progress = 0
+          ShowText = False
+        end
+      end
     end
   end
 end
