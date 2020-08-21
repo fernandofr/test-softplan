@@ -13,6 +13,12 @@ type
     PathSave: string;
   end;
 
+  TEntityDownload = record
+    UrlDownload: string;
+    BeginDownload: TDateTime;
+    EndDownload: TDateTime;
+  end;
+
 implementation
 
 end.
