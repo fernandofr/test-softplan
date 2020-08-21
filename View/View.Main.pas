@@ -23,7 +23,8 @@ uses
   FileCtrl,
   Vcl.WinXPanels,
   Service.Download,
-  Vcl.Samples.Gauges;
+  Vcl.Samples.Gauges,
+  Service.Database;
 
 type
   TViewMain = class(TForm)
@@ -42,21 +43,25 @@ type
     pnShowProgressDownload: TPanel;
     pnGgDownload: TPanel;
     ggDownload: TGauge;
+    pnViewDownloadHistory: TPanel;
     procedure sbLocalDonwloadInvokeSearch(Sender: TObject);
     procedure pnStartDonwloadClick(Sender: TObject);
     procedure pnCancelDonwloadClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure pnShowProgressDownloadClick(Sender: TObject);
+    procedure pnViewDownloadHistoryClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
     {$ENDREGION}
   private
     FServiceDownload: TServiceDownload;
+    FBeginDownload: TDateTime;
     procedure OnProgressTransferStart(ProgressCurrent: Integer);
     procedure OnProgressTransferEnd(Sender: TObject);
     procedure StartDownloadUpdateControls;
     procedure FinishDownloadUpdateControls;
+    procedure SaveDownloadDatabase;
+    function DownloadInProgress: boolean;
   public
-
   end;
 
 var
@@ -67,7 +72,9 @@ implementation
 {$R *.dfm}
 
 uses
-  Service.Consts;
+  Service.Consts,
+  View.DownloadHistory,
+  Helper.Question;
 
 procedure TViewMain.sbLocalDonwloadInvokeSearch(Sender: TObject);
 resourcestring
@@ -103,6 +110,31 @@ begin
   FServiceDownload.FreeOnTerminate := True;
 
   StartDownloadUpdateControls;
+  FBeginDownload := Now;
+end;
+
+procedure TViewMain.pnViewDownloadHistoryClick(Sender: TObject);
+begin
+  ViewDownloadHistory := TViewDownloadHistory.Create(Application);
+  ViewDownloadHistory.ShowModal;
+  ViewDownloadHistory.Free;
+end;
+
+procedure TViewMain.SaveDownloadDatabase;
+var
+  ServiceDatabase: TServiceDatabase;
+  EntityDownload: TEntityDownload;
+begin
+  EntityDownload.UrlDownload := edtUrlDonwload.Text;
+  EntityDownload.BeginDownload := FBeginDownload;
+  EntityDownload.EndDownload := Now;
+
+  ServiceDatabase := TServiceDatabase.Create;
+  try
+    ServiceDatabase.AddNewDownloadDatabase(EntityDownload);
+  finally
+    ServiceDatabase.Free;
+  end;
 end;
 
 procedure TViewMain.StartDownloadUpdateControls;
@@ -115,6 +147,11 @@ begin
   ViewMain.Height := 317;
 
   Application.ProcessMessages;
+end;
+
+function TViewMain.DownloadInProgress: boolean;
+begin
+  Result := (ggDownload.Progress > 0) and TQuestion.Ask('Download em Andamento', 'Existe download em andamento, deseja interrompe-lo ?')
 end;
 
 procedure TViewMain.FinishDownloadUpdateControls;
@@ -132,40 +169,32 @@ end;
 
 procedure TViewMain.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-//  FServiceManager.Free;
-//  FServiceDownload.Terminate
+  if not DownloadInProgress then
+    Exit;
+
+  Action := caNone;
+  FServiceDownload.CancelDownload;
+  Application.Terminate;
 end;
 
 procedure TViewMain.FormCreate(Sender: TObject);
 begin
   ViewMain.Height := 272;
-//  FServiceManager := TServiceManager.Create;
-//  FServiceManager.OnUpdateView :=  OnProgress;
 end;
 
 procedure TViewMain.OnProgressTransferStart(ProgressCurrent: Integer);
 begin
   ggDownload.Progress := ProgressCurrent;
   Application.ProcessMessages;
-
-//  memDownload.DisableControls;
-//  try
-//    if memDownload.Locate('IDENTIFY', ID, []) then
-//    begin
-//      memDownload.Edit;
-//      memDownloadPROGRESS.Value := ProgressCurrent;
-//      memDownload.Post;
-//    end;
-//  finally
-//    memDownload.EnableControls;
-//    Application.ProcessMessages;
-//  end;
 end;
 
 procedure TViewMain.OnProgressTransferEnd(Sender: TObject);
 begin
-  if ggDownload.Progress = 100 then
-    FinishDownloadUpdateControls;
+  if ggDownload.Progress < 100 then
+    Exit;
+
+  FinishDownloadUpdateControls;
+  SaveDownloadDatabase;
 end;
 
 procedure TViewMain.pnCancelDonwloadClick(Sender: TObject);
@@ -173,6 +202,4 @@ begin
   FServiceDownload.CancelDownload;
 end;
 
-//Initialization
-//  ReportMemoryLeaksOnShutdown := (DebugHook <> 0);
 end.

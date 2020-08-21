@@ -1,8 +1,9 @@
 object ViewMain: TViewMain
   Left = 0
   Top = 0
-  ClientHeight = 275
-  ClientWidth = 771
+  BorderStyle = bsSingle
+  ClientHeight = 285
+  ClientWidth = 810
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = 7829367
@@ -18,16 +19,17 @@ object ViewMain: TViewMain
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 771
-    Height = 275
+    Width = 810
+    Height = 285
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
+    ExplicitWidth = 771
     ExplicitHeight = 457
     object pnlTitulo: TPanel
       Left = 0
       Top = 0
-      Width = 771
+      Width = 810
       Height = 73
       Align = alTop
       BevelOuter = bvNone
@@ -38,6 +40,7 @@ object ViewMain: TViewMain
       Padding.Bottom = 10
       ParentBackground = False
       TabOrder = 0
+      ExplicitWidth = 771
       object lnInformacao: TLabel
         AlignWithMargins = True
         Left = 70
@@ -94,8 +97,8 @@ object ViewMain: TViewMain
     object pnInformacoes: TPanel
       Left = 0
       Top = 73
-      Width = 771
-      Height = 202
+      Width = 810
+      Height = 212
       Align = alClient
       BevelOuter = bvNone
       Color = clWhite
@@ -106,6 +109,7 @@ object ViewMain: TViewMain
       ParentBackground = False
       TabOrder = 1
       ExplicitTop = 79
+      ExplicitWidth = 771
       ExplicitHeight = 196
       object Label3: TLabel
         AlignWithMargins = True
@@ -146,7 +150,7 @@ object ViewMain: TViewMain
       object edtUrlDonwload: TEdit
         Left = 10
         Top = 19
-        Width = 751
+        Width = 776
         Height = 27
         BevelInner = bvNone
         Font.Charset = DEFAULT_CHARSET
@@ -163,7 +167,7 @@ object ViewMain: TViewMain
       object sbLocalDonwload: TSearchBox
         Left = 10
         Top = 78
-        Width = 751
+        Width = 776
         Height = 27
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 7829367
@@ -176,7 +180,7 @@ object ViewMain: TViewMain
         OnInvokeSearch = sbLocalDonwloadInvokeSearch
       end
       object pnCancelDonwload: TPanel
-        Left = 511
+        Left = 536
         Top = 115
         Width = 250
         Height = 41
@@ -195,7 +199,7 @@ object ViewMain: TViewMain
         OnClick = pnCancelDonwloadClick
       end
       object pnStartDonwload: TPanel
-        Left = 511
+        Left = 536
         Top = 115
         Width = 250
         Height = 41
@@ -213,7 +217,7 @@ object ViewMain: TViewMain
         OnClick = pnStartDonwloadClick
       end
       object pnShowProgressDownload: TPanel
-        Left = 255
+        Left = 273
         Top = 115
         Width = 250
         Height = 41
@@ -233,8 +237,8 @@ object ViewMain: TViewMain
       end
       object pnGgDownload: TPanel
         Left = 20
-        Top = 170
-        Width = 731
+        Top = 180
+        Width = 770
         Height = 22
         Align = alBottom
         BevelOuter = bvNone
@@ -244,10 +248,11 @@ object ViewMain: TViewMain
         ExplicitTop = 164
         ExplicitWidth = 741
         object ggDownload: TGauge
-          Left = -20
-          Top = 1
-          Width = 751
-          Height = 17
+          Left = 0
+          Top = 0
+          Width = 770
+          Height = 22
+          Align = alClient
           BackColor = 14474460
           BorderStyle = bsNone
           Color = clWhite
@@ -261,7 +266,29 @@ object ViewMain: TViewMain
           ParentFont = False
           Progress = 0
           ShowText = False
+          ExplicitLeft = -20
+          ExplicitTop = 4
+          ExplicitWidth = 781
+          ExplicitHeight = 17
         end
+      end
+      object pnViewDownloadHistory: TPanel
+        Left = 10
+        Top = 115
+        Width = 250
+        Height = 41
+        BevelOuter = bvNone
+        Caption = 'EXIBIR HIST'#211'RICO DE DOWNLOADS'
+        Color = 11814530
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        ParentBackground = False
+        ParentFont = False
+        TabOrder = 6
+        OnClick = pnViewDownloadHistoryClick
       end
     end
   end
