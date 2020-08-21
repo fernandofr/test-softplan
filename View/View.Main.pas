@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows,
   Winapi.Messages,
-  System.SysUtils,
+  SysUtils,
   System.Variants,
   System.Classes,
   Vcl.Graphics,
@@ -164,7 +164,7 @@ begin
   if sbLocalDonwload.Text = '' then
     raise Exception.Create(StrTellLocationSaveFile);
 
-  if not DirectoryExists(sbLocalDonwload.Text) then
+  if not SysUtils.DirectoryExists(sbLocalDonwload.Text) then
     raise Exception.Create(StrTellLocationSaveFile);
 end;
 
