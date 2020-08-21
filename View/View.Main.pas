@@ -151,7 +151,7 @@ end;
 
 function TViewMain.DownloadInProgress: boolean;
 begin
-  Result := (ggDownload.Progress > 0) and TQuestion.Ask('Download em Andamento', 'Existe download em andamento, deseja interrompe-lo ?')
+  Result := (ggDownload.Progress > 0);
 end;
 
 procedure TViewMain.FinishDownloadUpdateControls;
@@ -168,8 +168,12 @@ end;
 
 procedure TViewMain.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  if not DownloadInProgress then
-    Exit;
+  if DownloadInProgress then
+    if not TQuestion.Ask('Download em Andamento', 'Existe download em andamento, deseja interrompe-lo ?') then
+    begin
+      Action := caNone;
+      Exit;
+    end;
 
   Action := caNone;
   FServiceDownload.CancelDownload;
