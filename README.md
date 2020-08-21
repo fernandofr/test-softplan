@@ -21,7 +21,7 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias:
  
  2. Configurando a database.
    - Na pasta do projeto contem uma pasta chamada `Database` que possui uma base `SQLite` já     criada, que pode ser utilizada.
-   - Caso deseje criar uma nova base a estrutura é a seguinte:
+   - Caso deseje criar uma nova base a estrutura da tabela é a seguinte:
    ```
      CREATE TABLE LOGDOWNLOAD (
        ID    INTEGER       PRIMARY KEY AUTOINCREMENT NOT NULL,
@@ -36,11 +36,11 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias:
 
 
  ## Aplicação Rodando
-    - Na tela principal informe a `URL` para download e o diretório aonde deseja salvar o arquivo após o término.
-    - **Botão Iniciar Download**: Inicia o download do arquivo. Clicando no botão iniciar Download, será exibido o botão `Cancelar` e `Mostrar Informações` 
-    - **Botão Cancelar Download**: Cancela o download do arquivo.
-    - **Botão Exibir informações**: Mostra a porcentagem já baixada do arquivo.
-    - **Botão Histórico Download**: Abre uma nova tela listando todos downloads realizados.
-    
-    
 
+Na tela principal informe a `URL` para download e o diretório aonde deseja salvar o arquivo após término.
+
+ - **Botão Iniciar Download**: Inicia o download do arquivo. Clicando no botão iniciar Download, será exibido o botão `Cancelar` e `Mostrar Informações`
+ - **Botão Cancelar Download**: Cancela o download do arquivo.
+ - **Botão Exibir informações**: Mostra a porcentagem já baixada do arquivo.
+ - **Botão Histórico Download**: Abre uma nova tela listando todos downloads realizados.
+ 
