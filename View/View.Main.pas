@@ -60,12 +60,17 @@ type
     procedure StartDownloadUpdateControls;
     procedure FinishDownloadUpdateControls;
     procedure SaveDownloadDatabase;
+    procedure CheckParameters;
     function DownloadInProgress: boolean;
   public
   end;
 
 var
   ViewMain: TViewMain;
+
+resourcestring
+  StrEnterDownloadURL = 'Informe uma url válida.';
+  StrTellLocationSaveFile = 'Informe um diretório valido.';
 
 implementation
 
@@ -101,6 +106,8 @@ procedure TViewMain.pnStartDonwloadClick(Sender: TObject);
 var
   Params: TParamsDownloadFile;
 begin
+  CheckParameters;
+
   Params.URL := edtUrlDonwload.Text;
   Params.PathSave := IncludeTrailingPathDelimiter(sbLocalDonwload.Text);
 
@@ -147,6 +154,18 @@ begin
   ViewMain.Height := 317;
 
   Application.ProcessMessages;
+end;
+
+procedure TViewMain.CheckParameters;
+begin
+  if edtUrlDonwload.Text = '' then
+    raise Exception.Create(StrEnterDownloadURL);
+
+  if sbLocalDonwload.Text = '' then
+    raise Exception.Create(StrTellLocationSaveFile);
+
+  if not DirectoryExists(sbLocalDonwload.Text) then
+    raise Exception.Create(StrTellLocationSaveFile);
 end;
 
 function TViewMain.DownloadInProgress: boolean;
