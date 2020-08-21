@@ -24,8 +24,6 @@ object ViewMain: TViewMain
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitWidth = 771
-    ExplicitHeight = 457
     object pnlTitulo: TPanel
       Left = 0
       Top = 0
@@ -40,7 +38,6 @@ object ViewMain: TViewMain
       Padding.Bottom = 10
       ParentBackground = False
       TabOrder = 0
-      ExplicitWidth = 771
       object lnInformacao: TLabel
         AlignWithMargins = True
         Left = 70
@@ -108,9 +105,6 @@ object ViewMain: TViewMain
       Padding.Bottom = 10
       ParentBackground = False
       TabOrder = 1
-      ExplicitTop = 79
-      ExplicitWidth = 771
-      ExplicitHeight = 196
       object Label3: TLabel
         AlignWithMargins = True
         Left = 10
@@ -244,9 +238,6 @@ object ViewMain: TViewMain
         BevelOuter = bvNone
         TabOrder = 5
         Visible = False
-        ExplicitLeft = 10
-        ExplicitTop = 164
-        ExplicitWidth = 741
         object ggDownload: TGauge
           Left = 0
           Top = 0

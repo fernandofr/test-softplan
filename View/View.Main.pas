@@ -164,7 +164,6 @@ begin
 
   ViewMain.Height := 272;
   Application.ProcessMessages;
-  FServiceDownload.Terminate;
 end;
 
 procedure TViewMain.FormClose(Sender: TObject; var Action: TCloseAction);

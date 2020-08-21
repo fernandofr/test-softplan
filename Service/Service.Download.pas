@@ -108,7 +108,7 @@ begin
   if FCancelDownload then
   begin
     HTTP.Disconnect;
-    Abort;
+    Terminate;
   end;
 end;
 
