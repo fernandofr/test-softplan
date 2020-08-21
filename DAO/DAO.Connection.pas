@@ -73,10 +73,10 @@ var
 begin
   Path := ExtractFilePath(Application.ExeName);
 
-  if not FileExists(Path + 'Conexao.ini') then
+  if not FileExists(Path + 'Connection.ini') then
     exit;
 
-  Ini := TIniFile.Create(Path + 'Conexao.ini');
+  Ini := TIniFile.Create(Path + 'Connection.ini');
   try
     try
       FConnection.Connected := False;
